@@ -7,7 +7,7 @@ then
   git clone https://github.com/xiph/opus.git
   # get a fixed version after 1.3.1 to get cmake support
   cd opus
-  git checkout 71056d73fb39dad9b27b641a2683baed09dd4ecc
+  git checkout 2d862ea14b233e5a3f3afaf74d96050691af3cd5
   cat ../CMakeLists.txt.diff | patch -p 1
   cd ..
 fi
@@ -27,7 +27,7 @@ do
       -DANDROID_ABI=${ABI} \
       -DANDROID_NDK=${NDK_PATH} \
       -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=../lib/${ABI} \
-      -DCMAKE_BUILD_TYPE=Debug  \
+      -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_TOOLCHAIN_FILE=${NDK_PATH}/build/cmake/android.toolchain.cmake \
       -DANDROID_NATIVE_API_LEVEL=${API_LEVEL} \
       -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,max-page-size=16384" \
