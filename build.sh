@@ -2,6 +2,9 @@
 
 source ../../AVP/android-setup-light.sh
 
+LOCAL_PATH=$($READLINK -f .)
+PREBUILT_DIR=$($READLINK -f ../prebuilt/opus)
+
 if [ ! -d "opus" ]
 then
   git clone https://github.com/xiph/opus.git
@@ -16,7 +19,7 @@ API_LEVEL=21
 
 for ABI in armeabi-v7a arm64-v8a x86 x86_64
 do
-  if [ ! -f "lib/${ABI}/libopus.so" ]
+  if [ ! -f "${PREBUILT_DIR}/lib/${ABI}/libopus.so" ]
   then
     rm -rf build-${ABI}
     mkdir -p build-${ABI}
@@ -26,7 +29,7 @@ do
       -DBUILD_SHARED_LIBS=ON \
       -DANDROID_ABI=${ABI} \
       -DANDROID_NDK=${NDK_PATH} \
-      -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=../lib/${ABI} \
+      -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${PREBUILT_DIR}/lib/${ABI} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_TOOLCHAIN_FILE=${NDK_PATH}/build/cmake/android.toolchain.cmake \
       -DANDROID_NATIVE_API_LEVEL=${API_LEVEL} \
